@@ -2,22 +2,23 @@
 
 class Model {
     private $host = DB_HOST,
-            $name = DB_NAME,
+            $user = DB_USER,
             $pass = DB_PASS,
             $db_name = DB_NAME,
             $dbh,
             $stmt;
+    protected $table = 'petugas';
 
     public function __construct()
     {
         $dsn = "mysql:host={$this->host};dbname={$this->db_name}";
-        $option = [
+        $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
 
         try {
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $option);
+            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch(PDOException $e) {
             die($e->getMessage());
         }

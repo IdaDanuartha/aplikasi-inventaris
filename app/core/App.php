@@ -39,6 +39,8 @@ class App {
             $url = explode('/', $url);
 
             return $url;
+        } else {
+            return [$this->controller];
         }
     }
 }
