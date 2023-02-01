@@ -1,20 +1,15 @@
 <?php
 
 class Dashboard extends Controller {
-    public function __construct()
-    {
-        // dd(isset($_SESSION['login']));
-
-        if(!isset($_SESSION['login'])) {
-            redirect("auth");
-        }
-    }
-    
     public function index() {
-        $data['title'] = 'Dashboard Page';
+        if(isset($_SESSION['login'])) {
+            $data['title'] = 'Halaman Dashboard';
 
-        $this->view('layouts/dashboard/header', $data);
-        $this->view('dashboard/index', $data);
-        $this->view('layouts/dashboard/footer', $data);
+            $this->view('layouts/dashboard/header', $data);
+            $this->view('dashboard/index', $data);
+            $this->view('layouts/dashboard/footer', $data);
+        } else {
+            redirect("auth");
+        }        
     }
 }

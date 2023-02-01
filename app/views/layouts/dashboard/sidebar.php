@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= BASE_URL ?>/">
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
@@ -12,20 +12,24 @@
 <!-- Divider -->
 <hr class="sidebar-divider my-0">
 
+<div class="sidebar-heading mt-2">
+    <?= isset($_SESSION['petugas']) ? 'Administrator' : 'Pegawai' ?>
+</div>
+
 <li class="nav-item active">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Jenis Barang</span></a>
 </li>
     
 <li class="nav-item">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Data Ruangan</span></a>
 </li>
@@ -44,13 +48,13 @@
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= BASE_URL ?>/pegawai">
         <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Data Petugas</span></a>
+        <span>Data Pegawai</span></a>
 </li>
 
 <li class="nav-item">
-    <a class="nav-link" href="index.html">
+    <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Laporan</span></a>
 </li>
@@ -61,3 +65,13 @@
 </div>
 
 </ul>
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Topbar -->
+        <?php require_once "navbar.php" ?>
+        <!-- End of Topbar -->

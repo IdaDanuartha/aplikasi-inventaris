@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 31, 2023 at 12:49 PM
+-- Generation Time: Feb 01, 2023 at 02:17 PM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.4
 
@@ -39,8 +39,7 @@ CREATE TABLE `detail_pinjam` (
 
 INSERT INTO `detail_pinjam` (`id_detail_pinjam`, `id_inventaris`, `jumlah`) VALUES
 (11, 1, 1),
-(12, 2, 2),
-(13, 3, 3);
+(12, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -67,8 +66,7 @@ CREATE TABLE `inventaris` (
 
 INSERT INTO `inventaris` (`id_inventaris`, `nama`, `kondisi`, `keterangan`, `jumlah`, `id_jenis`, `tanggal_register`, `id_ruang`, `kode_inventaris`, `id_petugas`) VALUES
 (1, 'Danuartha', 'Bagus', 'Bagus sekali', 1, 1, '2022-07-07', 6, 'bisa', 1),
-(2, 'Pramantha', 'Tidak Bagus', 'Sangat tidak bagus', 2, 2, '2022-08-08', 7, 'bisa', 2),
-(3, 'Dwiki', 'Bagus', 'Sangat bagus', 3, 3, '2022-09-09', 8, 'bisa', 3);
+(2, 'Pramantha', 'Tidak Bagus', 'Sangat tidak bagus', 2, 2, '2022-08-08', 7, 'bisa', 2);
 
 -- --------------------------------------------------------
 
@@ -108,9 +106,8 @@ CREATE TABLE `level` (
 --
 
 INSERT INTO `level` (`id_level`, `nama_level`) VALUES
-(1, 'user'),
-(2, 'petugas'),
-(3, 'admin');
+(1, 'admin'),
+(2, 'operator');
 
 -- --------------------------------------------------------
 
@@ -176,9 +173,8 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama_petugas`, `id_level`) VALUES
-(1, 'user', 'adminbisa1', 'Alexa', 1),
-(2, 'petugas', 'petugasbisa1', 'Sinta', 2),
-(3, 'admin', 'adminbisa1', 'Danuartha', 3);
+(1, 'admin1', '123456', 'Alexa', 1),
+(2, 'operator1', '123456', 'Sinta', 2);
 
 -- --------------------------------------------------------
 

@@ -2,13 +2,6 @@
 
 class Auth extends Controller
 {
-    public function __construct()
-    {
-        if(isset($_SESSION['login'])) {
-            redirect("dashboard");
-        }
-    }
-
     public function index()
     {
         redirect("auth/login");
@@ -16,38 +9,47 @@ class Auth extends Controller
 
     public function login()
     {
-        $data['title'] = 'Login Page';
-
-        $this->view('layouts/auth/header', $data);
-        $this->view('auth/login', $data);
-        $this->view('layouts/auth/footer', $data);
+        if(!isset($_SESSION['login'])) {
+            $data['title'] = 'Halaman Login';
+    
+            $this->view('layouts/auth/header', $data);
+            $this->view('auth/login', $data);
+            $this->view('layouts/auth/footer', $data);
+        } else {
+            redirect("dashboard");
+        }
     }
 
     public function signin()
     {
-        if($this->model("User")->findPetugasByUsername($_POST['username']) > 0) {
-            if($this->model("User")->login($_POST)) {
-                redirect("dashboard");
+        if($_POST) {
+            if($this->model("UserModel")->findPetugasByUsername($_POST['username']) > 0) {
+                if($this->model("UserModel")->login($_POST)) {
+                    redirect("dashboard");
+                } else {
+                    Flasher::setFlash("Password anda salah", "danger");
+                    redirect("auth"); 
+                }
+            } else if($this->model("UserModel")->findPegawaiByName($_POST['username']) > 0) {
+                if($this->model("UserModel")->login($_POST)) {
+                    redirect("dashboard");
+                } else {
+                    Flasher::setFlash("Password anda salah", "danger");
+                    redirect("auth"); 
+                }
             } else {
-                Flasher::setFlash("Password anda salah", "danger");
-                redirect("auth"); 
-            }
-        } else if($this->model("User")->findPegawaiByName($_POST['username']) > 0) {
-            if($this->model("User")->login($_POST)) {
-                redirect("dashboard");
-            } else {
-                Flasher::setFlash("Password anda salah", "danger");
-                redirect("auth"); 
+                Flasher::setFlash("Username tidak ditemukan", "danger");
+                redirect("auth");
             }
         } else {
-            Flasher::setFlash("Username tidak ditemukan", "danger");
             redirect("auth");
         }
     }
 
     public function logout()
-    {
-        $this->model("User")->logout();
-        redirect("auth");
+    {        
+        if($this->model("UserModel")->logout()) {
+            redirect("auth");
+        }
     }
 }

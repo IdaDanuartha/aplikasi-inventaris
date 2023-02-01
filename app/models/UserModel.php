@@ -1,6 +1,6 @@
 <?php
 
-class User {
+class UserModel {
     protected $table = 'petugas',
               $table_pegawai = 'pegawai',
               $db;
@@ -12,7 +12,7 @@ class User {
     
     public function findPetugasByUsername($username)
     {
-        $this->db->query("SELECT * FROM {$this->table} WHERE username=:username");
+        $this->db->query("call findPetugas(:username)");
         $this->db->bind("username", $username);
 
         $row = $this->db->single();
@@ -26,7 +26,7 @@ class User {
 
     public function findPegawaiByName($nama_pegawai)
     {
-        $this->db->query("SELECT * FROM {$this->table_pegawai} WHERE nama_pegawai=:nama_pegawai");
+        $this->db->query("call findPegawai(:nama_pegawai)");
         $this->db->bind("nama_pegawai", $nama_pegawai);
 
         $row = $this->db->single();
@@ -63,5 +63,7 @@ class User {
         if(isset($_SESSION['petugas'])) unset($_SESSION['petugas']);
         if(isset($_SESSION['pegawai'])) unset($_SESSION['pegawai']);        
         unset($_SESSION['login']);
+
+        return true;
     }
 }
