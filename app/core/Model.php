@@ -7,7 +7,6 @@ class Model {
             $db_name = DB_NAME,
             $dbh,
             $stmt;
-    protected $table = 'petugas';
 
     public function __construct()
     {

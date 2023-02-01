@@ -9,18 +9,21 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="p-5 row g-5">
-                        <img class="col-6 img-profile rounded-circle" src="<?= BASE_URL ?>/assets/img/undraw_rocket.svg">
-                        <div class="col-6">
+                        <img class="col-lg-6 col-12 d-lg-flex d-none img-profile rounded-circle" src="<?= BASE_URL ?>/assets/img/undraw_rocket.svg">
+                        <div class="col-lg-6 col-12">
                             <div class="text-center">
                                 <h6>Halo User!</h5>
                                 <h2 class="text-gray-900 mb-4">Selamat Datang di Web Pembayaran Spp SMKN 1 Denpasar!</h2>
                             </div>
-                            <form class="user">
+                            <div>
+                                <?php Flasher::flash() ?>
+                            </div>
+                            <form class="user" action="<?= BASE_URL ?>/auth/signin" method="post">
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email">
+                                    <input type="text" name="username" class="form-control form-control-user" id="username" placeholder="Username">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                    <input type="password" name="password" class="form-control form-control-user" id="password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox small">
@@ -29,14 +32,14 @@
                                             Me</label>
                                     </div>
                                 </div>
-                                <a href="<?= BASE_URL ?>/dashboard" class="btn btn-primary btn-user btn-block">
+                                <button type="submit" class="btn btn-primary btn-user btn-block">
                                     Login
-                                </a>
+                                </button>
                             </form>
                             <hr>
                             <div class="d-flex justify-content-between">
                                 <a class="small" href="#">Forgot Password?</a>
-                                <a class="small" href="<?= BASE_URL ?>/register">Create an Account!</a>
+                                <a class="small" href="<?= BASE_URL ?>/auth/register">Create an Account!</a>
                             </div>
                         </div>
                     </div>
