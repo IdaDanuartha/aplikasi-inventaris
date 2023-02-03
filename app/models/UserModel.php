@@ -66,4 +66,5 @@ class UserModel {
 
         return true;
     }
+
 }

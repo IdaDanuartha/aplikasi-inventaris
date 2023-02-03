@@ -83,7 +83,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-body text-center">
-                                            <h5 class="font-weight-bold">Detail Pegawai</h5>
+                                            <h5 class="font-weight-bold">Hapus Pegawai</h5>
                                             <p class="mx-5 my-3">Apakah anda yakin ingin menghapus pegawai <span class="text-danger font-weight-bold"><?= $pegawai['nama_pegawai'] ?>?</span> Proses ini tidak dapat dibatalkan</span></p>
                                             <div class="d-flex justify-content-center mt-4">
                                                 <a href="#" data-dismiss="modal" class="btn btn-secondary btn-icon-split mr-3">

@@ -80,6 +80,6 @@ class Pegawai extends Controller
         } else {
             Flasher::setFlash("Data pegawai gagal dihapus", "danger");
         }
-        redirect("pegawai");
+        redirect("pegawai"); 
     }
 }

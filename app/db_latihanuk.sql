@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 01, 2023 at 02:17 PM
--- Server version: 5.7.33
--- PHP Version: 8.1.4
+-- Host: 127.0.0.1
+-- Generation Time: Feb 02, 2023 at 02:44 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `db_latihanuk`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nama` INT(50))  NO SQL
+BEGIN
+SELECT * FROM pegawai WHERE nama_pegawai=in_nama;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))  NO SQL
+BEGIN
+SELECT * FROM petugas WHERE username=in_username;
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -127,9 +143,9 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `nip`, `alamat`) VALUES
-(0, 'Dwiki', '00123123', 'Mars'),
-(1, 'Danuartha', '00124124', 'Bulan'),
-(2, 'Pramantha', '00125125', 'Saturnus');
+(1, 'Dwiki', '00123123', 'Mars'),
+(2, 'Danuartha', '00124124', 'Bulan'),
+(3, 'Pramantha', '00125125', 'Saturnus');
 
 -- --------------------------------------------------------
 
@@ -150,9 +166,9 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal_pinjam`, `tanggal_kembali`, `status_peminjaman`, `id_pegawai`) VALUES
-(1, '2022-01-01', '2022-02-02', 'pinjam', 0),
-(2, '2022-03-03', '2022-04-04', 'kembali', 1),
-(3, '2022-05-05', '2022-06-06', 'kembali', 2);
+(1, '2022-01-01', '2022-02-02', 'pinjam', 1),
+(2, '2022-03-03', '2022-04-04', 'kembali', 2),
+(3, '2022-05-05', '2022-06-06', 'kembali', 3);
 
 -- --------------------------------------------------------
 
@@ -265,6 +281,12 @@ ALTER TABLE `ruang`
 --
 ALTER TABLE `level`
   MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `pegawai`
+--
+ALTER TABLE `pegawai`
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
