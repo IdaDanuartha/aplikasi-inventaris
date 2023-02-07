@@ -47,7 +47,7 @@ class UserModel {
             $_SESSION['petugas'] = $petugas;
             $_SESSION['login'] = true;
             return $petugas;
-        } else if($pegawai['password'] === $data['password']) {
+        } else if(password_verify($data['password'], $pegawai['password'])) {
             $_SESSION['pegawai'] = $pegawai;
             $_SESSION['login'] = true;
             return $pegawai;

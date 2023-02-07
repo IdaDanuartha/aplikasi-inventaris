@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 02, 2023 at 02:44 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Host: localhost:3306
+-- Generation Time: Feb 07, 2023 at 01:17 PM
+-- Server version: 5.7.33
+-- PHP Version: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,14 +25,12 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nama` INT(50))  NO SQL
-BEGIN
-SELECT * FROM pegawai WHERE nama_pegawai=in_nama;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nip` VARCHAR(50))   BEGIN
+SELECT * FROM pegawai WHERE nip = in_nip;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))  NO SQL
-BEGIN
-SELECT * FROM petugas WHERE username=in_username;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))   BEGIN
+SELECT * FROM petugas WHERE username = in_username;
 END$$
 
 DELIMITER ;
@@ -135,17 +133,18 @@ CREATE TABLE `pegawai` (
   `id_pegawai` int(11) NOT NULL,
   `nama_pegawai` varchar(50) NOT NULL,
   `nip` varchar(50) NOT NULL,
-  `alamat` text NOT NULL
+  `alamat` text NOT NULL,
+  `password` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pegawai`
 --
 
-INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `nip`, `alamat`) VALUES
-(1, 'Dwiki', '00123123', 'Mars'),
-(2, 'Danuartha', '00124124', 'Bulan'),
-(3, 'Pramantha', '00125125', 'Saturnus');
+INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `nip`, `alamat`, `password`) VALUES
+(1, 'Dwiki', '00123123', 'Mars', '123456'),
+(2, 'Danuartha', '00124124', 'Bulan', '123456'),
+(3, 'Pramantha Dharma', '00125125', 'Saturnus', '123456');
 
 -- --------------------------------------------------------
 
@@ -166,9 +165,9 @@ CREATE TABLE `peminjaman` (
 --
 
 INSERT INTO `peminjaman` (`id_peminjaman`, `tanggal_pinjam`, `tanggal_kembali`, `status_peminjaman`, `id_pegawai`) VALUES
-(1, '2022-01-01', '2022-02-02', 'pinjam', 1),
-(2, '2022-03-03', '2022-04-04', 'kembali', 2),
-(3, '2022-05-05', '2022-06-06', 'kembali', 3);
+(4, '2023-01-30', '2023-01-31', 'kembali', 1),
+(5, '2023-02-01', '2023-02-02', 'kembali', 2),
+(6, '2023-01-27', '2023-01-28', 'pinjam', 3);
 
 -- --------------------------------------------------------
 
@@ -280,19 +279,19 @@ ALTER TABLE `ruang`
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
-  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_level` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_peminjaman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

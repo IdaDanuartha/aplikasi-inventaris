@@ -9,7 +9,7 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="p-5 row g-5">
-                        <img class="col-lg-6 col-12 d-lg-flex d-none img-profile rounded-circle" src="<?= BASE_URL ?>/assets/img/undraw_rocket.svg">
+                        <img class="col-lg-6 col-12 d-lg-flex d-none img-profile rounded-circle" src="<?= BASE_URL ?>/assets/img/undraw_profile_2.svg">
                         <div class="col-lg-6 col-12">
                             <div class="text-center">
                                 <h6>Halo User!</h5>
@@ -36,11 +36,11 @@
                                     Login
                                 </button>
                             </form>
-                            <hr>
+                            <!-- <hr>
                             <div class="d-flex justify-content-between">
                                 <a class="small" href="#">Forgot Password?</a>
                                 <a class="small" href="<?= BASE_URL ?>/auth/register">Create an Account!</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

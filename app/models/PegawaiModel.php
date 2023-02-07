@@ -17,10 +17,13 @@ class PegawaiModel {
 
     public function store($data)
     {
-        $this->db->query("INSERT INTO {$this->table} VALUES(null, :nama_pegawai, :nip, :alamat)");
+        $hash = password_hash($data['password'], PASSWORD_BCRYPT);
+
+        $this->db->query("INSERT INTO {$this->table} VALUES(null, :nama_pegawai, :nip, :alamat, :password)");
         $this->db->bind("nama_pegawai", $data["nama_pegawai"]);
         $this->db->bind("nip", $data["nip"]);
         $this->db->bind("alamat", $data["alamat"]);
+        $this->db->bind("password", $hash);
         $this->db->execute();
 
         return $this->db->rowCount();
@@ -36,11 +39,15 @@ class PegawaiModel {
 
     public function update($data)
     {
-        $this->db->query("UPDATE {$this->table} SET nama_pegawai=:nama_pegawai, nip=:nip, alamat=:alamat WHERE id_pegawai=:id_pegawai");
+        $pegawai = $this->edit($data['id_pegawai']);
+        $hash = password_hash($data['password'], PASSWORD_BCRYPT);
+
+        $this->db->query("UPDATE {$this->table} SET nama_pegawai=:nama_pegawai, nip=:nip, alamat=:alamat, password=:password WHERE id_pegawai=:id_pegawai");
         $this->db->bind("nama_pegawai", $data["nama_pegawai"]);
         $this->db->bind("nip", $data["nip"]);
         $this->db->bind("alamat", $data["alamat"]);
         $this->db->bind("id_pegawai", $data["id_pegawai"]);
+        $this->db->bind("password", $hash ?? $pegawai['password']);
         $this->db->execute();
 
         return $this->db->rowCount();

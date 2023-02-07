@@ -19,7 +19,11 @@
                 </div>
                 <div class="mb-3" style="margin-left: -10px;">
                     <label for="alamat" class="form-label">Alamat</label>
-                    <input type="text" placeholder="Input alamat pegawai" name="alamat" value="<?= $data['pegawai']['alamat'] ?>" class="form-control">
+                    <input type="text" placeholder="Input alamat" name="alamat" value="<?= $data['pegawai']['alamat'] ?>" class="form-control">
+                </div>
+                <div class="mb-3" style="margin-left: -10px;">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" placeholder="Input password" name="password" class="form-control">
                 </div>
                 <div class="d-flex justify-content-end">
                     <button type="submit" class="btn btn-primary">Simpan perubahan</button>
