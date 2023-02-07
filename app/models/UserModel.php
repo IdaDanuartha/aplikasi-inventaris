@@ -24,10 +24,10 @@ class UserModel {
         }
     }
 
-    public function findPegawaiByName($nama_pegawai)
+    public function findPegawaiByName($nip)
     {
-        $this->db->query("call findPegawai(:nama_pegawai)");
-        $this->db->bind("nama_pegawai", $nama_pegawai);
+        $this->db->query("call findPegawai(:nip)");
+        $this->db->bind("nip", $nip);
 
         $row = $this->db->single();
 
@@ -47,7 +47,7 @@ class UserModel {
             $_SESSION['petugas'] = $petugas;
             $_SESSION['login'] = true;
             return $petugas;
-        } else if($pegawai['nip'] === $data['password']) {
+        } else if($pegawai['password'] === $data['password']) {
             $_SESSION['pegawai'] = $pegawai;
             $_SESSION['login'] = true;
             return $pegawai;
