@@ -13,31 +13,37 @@ class Pegawai extends Controller
             $this->view('layouts/dashboard/footer', $data);
         } else {
             redirect("auth");
-        }  
+        }
     }
 
-    public function create()
+    public function create($old_data = '')
     {
         if(isset($_SESSION['login'])) {
             $data['title'] = 'Halaman Tambah Pegawai';
 
             $this->view('layouts/dashboard/header', $data);
-            $this->view('pegawai/create');
+            $this->view('pegawai/create', $old_data);
             $this->view('layouts/dashboard/footer');
         } else {
             redirect("auth");
-        }  
+        }
     }
 
     public function store()
     {
+        $rules = $this->request('PegawaiRequest')->rules($_POST['nama_pegawai'], $_POST['nip'], $_POST['alamat'], $_POST['password']);
+
         if($_POST) {
-            if($this->model("PegawaiModel")->store($_POST) > 0) {
-                Flasher::setFlash("Data pegawai berhasil ditambahkan", "success");
-                redirect("pegawai"); 
+            if($rules) {
+                if($this->model("PegawaiModel")->store($_POST) > 0) {
+                    Flasher::setFlash("Data pegawai berhasil ditambahkan", "success");
+                    redirect("pegawai"); 
+                } else {
+                    Flasher::setFlash("Data pegawai gagal ditambahkan", "danger");
+                    $this->create($_POST);
+                }
             } else {
-                Flasher::setFlash("Data pegawai gagal ditambahkan", "danger");
-                redirect("pegawai/create"); 
+                $this->create($_POST);
             }
         } else {
             redirect("pegawai");
@@ -60,13 +66,19 @@ class Pegawai extends Controller
 
     public function update()
     {
+        $rules = $this->request('PegawaiRequest')->rules($_POST['nama_pegawai'], $_POST['nip'], $_POST['alamat'], $_POST['password'], 'edit');
+
         if($_POST) {
-            if($this->model("PegawaiModel")->update($_POST) > 0) {
-                Flasher::setFlash("Data pegawai berhasil diubah", "success");
-                redirect("pegawai"); 
+            if($rules) {
+                if($this->model("PegawaiModel")->update($_POST) > 0) {
+                    Flasher::setFlash("Data pegawai berhasil diubah", "success");
+                    redirect("pegawai"); 
+                } else {
+                    Flasher::setFlash("Data pegawai gagal diubah", "danger");
+                    $this->edit($_POST['id_pegawai'], $_POST);
+                }
             } else {
-                Flasher::setFlash("Data pegawai gagal diubah", "danger");
-                redirect("pegawai/edit"); 
+                $this->edit($_POST['id_pegawai'], $_POST);
             }
         } else {
             redirect("pegawai");

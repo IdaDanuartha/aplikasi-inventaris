@@ -8,4 +8,9 @@ class Controller {
         require_once("../app/models/$model.php");
         return new $model;
     }
+
+    public function request($request) {
+        require_once("../app/requests/$request.php");
+        return new $request;
+    }
 }

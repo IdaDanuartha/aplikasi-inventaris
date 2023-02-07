@@ -6,7 +6,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Aplikasi Inventaris</div>
 </a>
 
 <!-- Divider -->
@@ -16,19 +16,19 @@
     <?= isset($_SESSION['petugas']) ? 'Administrator' : 'Pegawai' ?>
 </div>
 
-<li class="nav-item active">
+<li class="nav-item <?= CURRENT_URL === BASE_URL . '/' || CURRENT_URL === BASE_URL . '/dashboard' || CURRENT_URL === BASE_URL . '/dashboard/index' ? 'active' : '' ?>">
     <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item <?= CURRENT_URL === BASE_URL . '/jenisbarang' ? 'active' : '' ?>">
     <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Jenis Barang</span></a>
 </li>
     
-<li class="nav-item">
+<li class="nav-item <?= CURRENT_URL === BASE_URL . '/ruangan' ? 'active' : '' ?>">
     <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Data Ruangan</span></a>
@@ -41,19 +41,19 @@
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="buttons.html">Barang Masuk</a>
-            <a class="collapse-item" href="cards.html">Barang Keluar</a>
+            <a class="collapse-item <?= CURRENT_URL === BASE_URL . '/barang/masuk' ? 'active' : '' ?>" href="buttons.html">Barang Masuk</a>
+            <a class="collapse-item <?= CURRENT_URL === BASE_URL . '/barang/keluar' ? 'active' : '' ?>" href="cards.html">Barang Keluar</a>
         </div>
     </div>
 </li>
 
-<li class="nav-item">
+<li class="nav-item <?= CURRENT_URL === BASE_URL . '/pegawai' ? 'active' : '' ?>">
     <a class="nav-link" href="<?= BASE_URL ?>/pegawai">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Data Pegawai</span></a>
 </li>
 
-<li class="nav-item">
+<li class="nav-item <?= CURRENT_URL === BASE_URL . '/laporan' ? 'active' : '' ?>">
     <a class="nav-link" href="<?= BASE_URL ?>/">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Laporan</span></a>
