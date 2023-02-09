@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Feb 07, 2023 at 01:17 PM
--- Server version: 5.7.33
--- PHP Version: 8.1.4
+-- Host: 127.0.0.1
+-- Generation Time: Feb 09, 2023 at 02:54 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,11 +25,11 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nip` VARCHAR(50))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nip` VARCHAR(50))  BEGIN
 SELECT * FROM pegawai WHERE nip = in_nip;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))   BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))  BEGIN
 SELECT * FROM petugas WHERE username = in_username;
 END$$
 
@@ -47,14 +47,6 @@ CREATE TABLE `detail_pinjam` (
   `jumlah` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `detail_pinjam`
---
-
-INSERT INTO `detail_pinjam` (`id_detail_pinjam`, `id_inventaris`, `jumlah`) VALUES
-(11, 1, 1),
-(12, 2, 2);
-
 -- --------------------------------------------------------
 
 --
@@ -64,23 +56,15 @@ INSERT INTO `detail_pinjam` (`id_detail_pinjam`, `id_inventaris`, `jumlah`) VALU
 CREATE TABLE `inventaris` (
   `id_inventaris` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `kondisi` enum('Bagus','Tidak Bagus','','') NOT NULL,
+  `kondisi` enum('Bagus','Tidak Bagus') NOT NULL,
   `keterangan` text NOT NULL,
-  `jumlah` int(10) NOT NULL,
+  `jumlah` int(11) NOT NULL,
   `id_jenis` int(11) NOT NULL,
   `tanggal_register` date NOT NULL,
   `id_ruang` int(11) NOT NULL,
   `kode_inventaris` varchar(10) NOT NULL,
   `id_petugas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `inventaris`
---
-
-INSERT INTO `inventaris` (`id_inventaris`, `nama`, `kondisi`, `keterangan`, `jumlah`, `id_jenis`, `tanggal_register`, `id_ruang`, `kode_inventaris`, `id_petugas`) VALUES
-(1, 'Danuartha', 'Bagus', 'Bagus sekali', 1, 1, '2022-07-07', 6, 'bisa', 1),
-(2, 'Pramantha', 'Tidak Bagus', 'Sangat tidak bagus', 2, 2, '2022-08-08', 7, 'bisa', 2);
 
 -- --------------------------------------------------------
 
@@ -121,7 +105,7 @@ CREATE TABLE `level` (
 
 INSERT INTO `level` (`id_level`, `nama_level`) VALUES
 (1, 'admin'),
-(2, 'operator');
+(2, 'petugas');
 
 -- --------------------------------------------------------
 
@@ -142,9 +126,10 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `nip`, `alamat`, `password`) VALUES
-(1, 'Dwiki', '00123123', 'Mars', '123456'),
-(2, 'Danuartha', '00124124', 'Bulan', '123456'),
-(3, 'Pramantha Dharma', '00125125', 'Saturnus', '123456');
+(1, 'Dwiki', '00123123', 'Sibang Kaja', '$2y$10$bdZcbz34kpmVgpQMvQHBxuZm4iQtwQBcdnHOcT012EhKtSCh3mMSe'),
+(2, 'Danuartha', '00124124', 'Dalung permai', '$2y$10$MuphOftEl7CYHXBABMaF7eRdnY/rJDVER3BiiSqgatOjHKExOHpZq'),
+(3, 'Pramantha Dharma', '00125125', 'Jln. Nangka', '$2y$10$TF1PalsLl783bY6xCebpZOGtqHQiGTGbNIjztFyTb9WEaJy4f0o5a'),
+(4, 'Wahyu', '00125126', 'Jln. Sedap Malam', '$2y$10$NkSB6bqp5344qNtCtt4eKuunHZHpy9uIsOdwcx7rPCU0tR/n1C/XS');
 
 -- --------------------------------------------------------
 
@@ -153,7 +138,7 @@ INSERT INTO `pegawai` (`id_pegawai`, `nama_pegawai`, `nip`, `alamat`, `password`
 --
 
 CREATE TABLE `peminjaman` (
-  `id_peminjaman` int(10) NOT NULL,
+  `id_peminjaman` int(11) NOT NULL,
   `tanggal_pinjam` date NOT NULL,
   `tanggal_kembali` date NOT NULL,
   `status_peminjaman` enum('pinjam','kembali','hilang','') NOT NULL,
@@ -209,9 +194,9 @@ CREATE TABLE `ruang` (
 --
 
 INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `kode_ruang`, `keterangan`) VALUES
-(6, 'Balkon', 'bisa', 'Bagus sekali'),
-(7, 'Balon', 'bisa', 'Bagus sekali'),
-(8, 'Batako', 'bisa', 'Bagus sekali');
+(6, '12 RPL 1', '101', 'Bagus sekali'),
+(7, '12 RPL 2', '321', 'Bagus Sekali 123'),
+(8, '10 TKJ 1', '103', 'Bagus sekali');
 
 --
 -- Indexes for dumped tables
@@ -276,6 +261,12 @@ ALTER TABLE `ruang`
 --
 
 --
+-- AUTO_INCREMENT for table `jenis`
+--
+ALTER TABLE `jenis`
+  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `level`
 --
 ALTER TABLE `level`
@@ -285,13 +276,19 @@ ALTER TABLE `level`
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `peminjaman`
 --
 ALTER TABLE `peminjaman`
-  MODIFY `id_peminjaman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ruang`
+--
+ALTER TABLE `ruang`
+  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -307,9 +304,9 @@ ALTER TABLE `detail_pinjam`
 -- Constraints for table `inventaris`
 --
 ALTER TABLE `inventaris`
-  ADD CONSTRAINT `inventaris_ibfk_1` FOREIGN KEY (`id_jenis`) REFERENCES `jenis` (`id_jenis`),
   ADD CONSTRAINT `inventaris_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`),
-  ADD CONSTRAINT `inventaris_ibfk_3` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`);
+  ADD CONSTRAINT `inventaris_ibfk_3` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`),
+  ADD CONSTRAINT `inventaris_ibfk_4` FOREIGN KEY (`id_jenis`) REFERENCES `jenis` (`id_jenis`);
 
 --
 -- Constraints for table `peminjaman`
