@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 14, 2023 at 03:21 PM
+-- Generation Time: Feb 14, 2023 at 03:23 PM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.4
 
@@ -174,7 +174,8 @@ CREATE TABLE `petugas` (
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama_petugas`, `id_level`) VALUES
 (1, 'admin1', '$2y$10$iIPncUqTztYlmNOBjYjc8eX6/UwB6MWIVZEMhhAHMauF/6ERxlf5i', 'Alexa', 1),
-(2, 'petugas2', '$2y$10$beF/tbsUZ/uAFYxzL4zqZ.bSCGdp8HvlMHkTarqyrtr93/.ZQ.kDO', 'Sinta Edit', 2);
+(2, 'petugas', '$2y$10$M31lGml5on087Int4wBUu.YS5FHRXAeJ9wPLgQk0dKP.DzWwgEP56', 'Sinta', 2),
+(4, 'petugas2', '$2y$10$nUhWIn7Ea11cWb0K/mAnce/XFBEPN8o1HGHw1lCA/8EfiPtKQoJci', 'Danuartha', 2);
 
 -- --------------------------------------------------------
 
@@ -300,7 +301,7 @@ ALTER TABLE `peminjaman`
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ruang`

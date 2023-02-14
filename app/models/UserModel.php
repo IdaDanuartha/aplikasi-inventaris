@@ -43,7 +43,7 @@ class UserModel {
         $petugas = $this->findPetugasByUsername($data['username']);
         $pegawai = $this->findPegawaiByName($data['username']);
 
-        if($petugas['password'] === $data['password']) {
+        if(password_verify($data['password'], $petugas['password'])) {
             $_SESSION['petugas'] = $petugas;
             $_SESSION['login'] = true;
             return $petugas;
