@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 09, 2023 at 02:54 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Host: localhost:3306
+-- Generation Time: Feb 14, 2023 at 03:21 PM
+-- Server version: 5.7.33
+-- PHP Version: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -25,11 +25,11 @@ DELIMITER $$
 --
 -- Procedures
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nip` VARCHAR(50))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPegawai` (IN `in_nip` VARCHAR(50))   BEGIN
 SELECT * FROM pegawai WHERE nip = in_nip;
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `findPetugas` (IN `in_username` VARCHAR(30))   BEGIN
 SELECT * FROM petugas WHERE username = in_username;
 END$$
 
@@ -173,8 +173,8 @@ CREATE TABLE `petugas` (
 --
 
 INSERT INTO `petugas` (`id_petugas`, `username`, `password`, `nama_petugas`, `id_level`) VALUES
-(1, 'admin1', '123456', 'Alexa', 1),
-(2, 'operator1', '123456', 'Sinta', 2);
+(1, 'admin1', '$2y$10$iIPncUqTztYlmNOBjYjc8eX6/UwB6MWIVZEMhhAHMauF/6ERxlf5i', 'Alexa', 1),
+(2, 'petugas2', '$2y$10$beF/tbsUZ/uAFYxzL4zqZ.bSCGdp8HvlMHkTarqyrtr93/.ZQ.kDO', 'Sinta Edit', 2);
 
 -- --------------------------------------------------------
 
@@ -261,10 +261,22 @@ ALTER TABLE `ruang`
 --
 
 --
+-- AUTO_INCREMENT for table `detail_pinjam`
+--
+ALTER TABLE `detail_pinjam`
+  MODIFY `id_detail_pinjam` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `inventaris`
+--
+ALTER TABLE `inventaris`
+  MODIFY `id_inventaris` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `jenis`
 --
 ALTER TABLE `jenis`
-  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_jenis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `level`
@@ -285,10 +297,16 @@ ALTER TABLE `peminjaman`
   MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `petugas`
+--
+ALTER TABLE `petugas`
+  MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `ruang`
 --
 ALTER TABLE `ruang`
-  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
@@ -304,9 +322,9 @@ ALTER TABLE `detail_pinjam`
 -- Constraints for table `inventaris`
 --
 ALTER TABLE `inventaris`
-  ADD CONSTRAINT `inventaris_ibfk_2` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`),
   ADD CONSTRAINT `inventaris_ibfk_3` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`),
-  ADD CONSTRAINT `inventaris_ibfk_4` FOREIGN KEY (`id_jenis`) REFERENCES `jenis` (`id_jenis`);
+  ADD CONSTRAINT `inventaris_ibfk_4` FOREIGN KEY (`id_jenis`) REFERENCES `jenis` (`id_jenis`),
+  ADD CONSTRAINT `inventaris_ibfk_5` FOREIGN KEY (`id_petugas`) REFERENCES `petugas` (`id_petugas`);
 
 --
 -- Constraints for table `peminjaman`
